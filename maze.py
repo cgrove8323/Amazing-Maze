@@ -73,6 +73,34 @@ wall20 = [200, 550, 150, 25]
 wall21 = [350, 400, 25, 125]
 wall22 = [375, 500, 25, 100]
 wall23 = [350, 600, 75, 25]
+wall24 = [400, 650, 25, 75]
+wall25 = [350, 700, 50, 25]
+wall26 = [350, 725, 25, 75]
+wall27 = [375, 750, 150, 25]
+wall28 = [500, 775, 25, 25]
+wall29 = [400, 400, 25, 75]
+wall30 = [425, 450, 25, 125]
+wall31 = [450, 550, 25, 175]
+wall32 = [475, 700, 100, 25]
+wall33 = [550, 725, 25, 75]
+wall34 = [575, 750, 100, 25]
+wall35 = [675, 650, 25, 150]
+wall36 = [700, 650, 50, 25]
+wall37 = [725, 550, 25, 100]
+wall38 = [375, 250, 25, 125]
+wall39 = [400, 250, 100, 25]
+wall40 = [500, 250, 25, 75]
+wall41 = [425, 300, 75, 25]
+wall42 = [400, 350, 125, 25]
+wall43 = [400, 0, 25, 75]
+wall44 = [425, 0, 25, 25]
+wall45 = [425, 50, 25, 25]
+wall46 = [325, 100, 125, 25]
+wall47 = [475, 0, 25, 125]
+wall48 = [500, 0, 175, 25]
+wall49 = [500, 100, 150, 25]
+wall50 = [650, 50, 25, 75]
+wall51 = [525, 50, 125, 25]
 
 wall101 = [125, 0, 25, 75]
 wall102 = [150, 50, 100, 25]
@@ -102,15 +130,49 @@ wall125 = [300, 675, 25, 125]
 wall126 = [250, 600, 75, 25]
 wall127 = [250, 650, 150, 25]
 wall128 = [275, 575, 25, 25]
+wall129 = [450, 400, 100, 25]
+wall130 = [475, 450, 150, 25]
+wall131 = [475, 500, 50, 25]
+wall132 = [525, 475, 25, 50]
+wall133 = [575, 475, 25, 75]
+wall134 = [550, 550, 150, 25]
+wall135 = [625, 575, 25, 25]
+wall136 = [550, 600, 150, 25]
+wall137 = [500, 550, 25, 100]
+wall138 = [500, 650, 100, 25]
+wall139 = [625, 650, 25, 75]
+wall140 = [600, 700, 25, 25]
+wall141 = [475, 150, 25, 75]
+wall142 = [525, 150, 25, 75]
+wall143 = [550, 150, 50, 25]
+wall144 = [575, 175, 25, 50]
+wall145 = [600, 200, 50, 25]
+wall146 = [625, 150, 25, 50]
+wall147 = [675, 150, 25, 75]
+wall148 = [550, 250, 25, 125]
+wall149 = [575, 350, 25, 75]
+wall150 = [600, 250, 75, 25]
+wall151 = [600, 300, 25, 25]
+wall152 = [625, 300, 25, 125]
+wall153 = [650, 350, 50, 25]
+wall154 = [650, 400, 50, 25]
+wall155 = [650, 425, 25, 75]
+wall156 = [625, 500, 125, 25]
 
 walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7,
          wall8, wall9, wall10, wall11,wall12, wall13, wall14, wall15, wall16,
-         wall17, wall18, wall19, wall20, wall21, wall22, wall23,  
+         wall17, wall18, wall19, wall20, wall21, wall22, wall23, wall24, wall25,
+         wall26, wall27, wall28, wall29, wall30, wall31, wall32, wall33, wall34,
+         wall35, wall36, wall37, wall38, wall39, wall40, wall41, wall42, wall43,
+         wall44, wall45, wall46, wall47, wall48, wall49, wall50, wall51, 
          wall101, wall102, wall103, wall104, wall105,
          wall106, wall107, wall108, wall109, wall110, wall111,
          wall112, wall113, wall114, wall115, wall116, wall117, wall118, wall119,
          wall120, wall121, wall122, wall123, wall124, wall125, wall126, wall127,
-         wall128]
+         wall128, wall129, wall130, wall131, wall132, wall133, wall134, wall135,
+         wall136, wall137, wall138, wall139, wall140, wall141, wall142, wall143,
+         wall144, wall145, wall146, wall147, wall148, wall149, wall150, wall151,
+         wall152, wall153, wall154, wall155, wall156]
 
 # Make coins
 coin1 = [325, 500, 25, 25]
@@ -211,17 +273,7 @@ while not done:
     screen.fill(BLACK)
 
     pygame.draw.rect(screen, WHITE, player)
-    '''begin/end game text'''
-    if stage == START:
-        text1 = MY_FONT.render("THE AMAZING MAZE", True, WHITE)
-        text2 = MY_FONT.render("Press ENTER to play!", True, WHITE)
-        screen.blit(text1, [400, 400])
-        screen.blit(text2, [400, 500])
-    elif stage == END:
-        text1 = MY_FONT.render("Game Over", True, WHITE)
-        text2 = MY_FONT.render("Press SPACE to restart.", True, WHITE)
-        screen.blit(text1, [400, 400])
-        screen.blit(text2, [400, 500])
+   
     
     for w in walls:
         pygame.draw.rect(screen, RED, w)
@@ -233,6 +285,18 @@ while not done:
         font = pygame.font.Font(None, 48)
         text = font.render("You Win!", 1, GREEN)
         screen.blit(text, [500, 200])
+
+    '''begin/end game text'''
+    if stage == START:
+        text1 = MY_FONT.render("THE AMAZING MAZE", True, WHITE)
+        text2 = MY_FONT.render("Press ENTER to play!", True, WHITE)
+        screen.blit(text1, [400, 400])
+        screen.blit(text2, [400, 500])
+    elif stage == END:
+        text1 = MY_FONT.render("Game Over", True, WHITE)
+        text2 = MY_FONT.render("Press SPACE to restart.", True, WHITE)
+        screen.blit(text1, [400, 400])
+        screen.blit(text2, [400, 500])
 
     
     # Update screen (Actually draw the picture in the window.)

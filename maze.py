@@ -36,11 +36,12 @@ PLAYING = 1
 END = 2
 
 def setup():
-    global coins, win, lose, stage, player, player_vx, player_vy, player_speed, badguy, badguy_vx, badguy_vy, badguy_speed 
+    global score, coins, win, lose, stage, player, player_vx, player_vy, player_speed, badguy, badguy_vx, badguy_vy, badguy_speed 
 
     stage = START
     win = False
     lose = False
+    score = 0
 
     # Make a player
     player =  [525, 425, 25, 25]
@@ -68,30 +69,30 @@ def setup():
     coin11 = [600, 625, 25, 25]
     coin12 = [625, 725, 25, 25]
     coin13 = [625, 425, 25, 25]
-    coin14 = [625, 425, 25, 25]
-    coin15 = [700, 350, 25, 25]
-    coin16 = [700, 475, 25, 25]
-    coin17 = [700, 575, 25, 25]
-    coin18 = [700, 750, 25, 25]
-    coin19 = [800, 475, 25, 25]
-    coin20 = [825, 600, 25, 25]
-    coin21 = [850, 75, 25, 25]
-    coin22 = [850, 200, 25, 25]
-    coin23 = [850, 300, 25, 25]
-    coin24 = [900, 725, 25, 25]
-    coin25 = [975, 275, 25, 25]
-    coin26 = [975, 525, 25, 25]
-    coin27 = [975, 750, 25, 25]
-    coin28 = [1025, 150, 25, 25]
-    coin29 = [1050, 25, 25, 25]
-    coin30 = [1075, 225, 25, 25]
-    coin31 = [1075, 575, 25, 25]
-    coin32 = [1125, 450, 25, 25]
-    coin33 = [1150, 725, 25, 25]
-    coin34 = [100, 275, 25, 25]
-    coin35 = [100, 525, 25, 25]
-    coin36 = [150, 525, 25, 25]
-    coin37 = [250, 125, 25, 25]
+    coin14 = [700, 350, 25, 25]
+    coin15 = [700, 475, 25, 25]
+    coin16 = [700, 575, 25, 25]
+    coin17 = [700, 750, 25, 25]
+    coin18 = [800, 475, 25, 25]
+    coin19 = [825, 600, 25, 25]
+    coin20 = [850, 75, 25, 25]
+    coin21 = [850, 200, 25, 25]
+    coin22 = [850, 300, 25, 25]
+    coin23 = [900, 725, 25, 25]
+    coin24 = [975, 275, 25, 25]
+    coin25 = [975, 525, 25, 25]
+    coin26 = [975, 750, 25, 25]
+    coin27 = [1025, 150, 25, 25]
+    coin28 = [1050, 25, 25, 25]
+    coin29 = [1075, 225, 25, 25]
+    coin30 = [1075, 575, 25, 25]
+    coin31 = [1125, 450, 25, 25]
+    coin32 = [1150, 725, 25, 25]
+    coin33 = [100, 275, 25, 25]
+    coin34 = [100, 525, 25, 25]
+    coin35 = [200, 525, 25, 25]
+    coin36 = [250, 125, 25, 25]
+    coin37 = [125, 750, 25, 25]
 
     coins = [coin1, coin2, coin3, coin4, coin5, coin6, coin7, coin8, coin9,
              coin10, coin11, coin12, coin13, coin14, coin15, coin16, coin17,
@@ -101,7 +102,7 @@ def setup():
 
 # make walls
 wall1 = [75, 0, 25, 100]
-wall2 = [25, 100, 150, 25]
+wall2 = [0, 100, 175, 25]
 wall3 = [175, 100, 25, 100]
 wall4 = [175, 200, 100, 25]
 wall5 = [275, 200, 25, 100]
@@ -113,7 +114,7 @@ wall10 = [125, 450, 150, 25]
 wall11 = [125, 300, 25, 125]
 wall12 = [75, 300, 50, 25]
 wall13 = [75, 200, 25, 100]
-wall14 = [100, 700, 25, 75]
+wall14 = [100, 700, 25, 100]
 wall15 = [75, 700, 25, 25]
 wall16 = [50, 625, 25, 100]
 wall17 = [50, 600, 50, 25]
@@ -198,12 +199,12 @@ wall108 = [300, 400, 25, 125]
 wall109 = [125, 500, 175, 25]
 wall110 = [75, 350, 25, 175]
 wall111 = [25, 350, 50, 25]
-wall112 = [25, 125, 25, 225]
-wall113 = [25, 150, 125, 25]
+wall112 = [25, 175, 25, 175]
+wall113 = [0, 150, 150, 25]
 wall114 = [125, 175, 25, 100]
 wall115 = [125, 250, 125, 25]
 wall116 = [0, 500, 75, 25]
-wall117 = [0, 525, 25, 250]
+wall117 = [0, 550, 25, 225]
 wall118 = [25, 750, 100, 25]
 wall119 = [50, 550, 50, 25]
 wall120 = [125, 500, 25, 150]
@@ -289,6 +290,8 @@ wall199 = [950, 700, 150, 25]
 wall200 = [1100, 675, 25, 50]
 wall201 = [1025, 625, 25, 75]
 wall202 = [1050, 625, 75, 25]
+wall203 = [150, 750, 25, 50]
+wall204 = [250, 750, 25, 50]
 
 walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7,
          wall8, wall9, wall10, wall11,wall12, wall13, wall14, wall15, wall16,
@@ -313,7 +316,7 @@ walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7,
          wall176, wall177, wall178, wall179, wall180, wall181, wall182, wall183,
          wall184, wall185, wall186, wall187, wall188, wall189, wall190, wall191,
          wall192, wall193, wall194, wall195, wall196, wall197, wall198, wall199,
-         wall200, wall201, wall202]
+         wall200, wall201, wall202, wall203, wall204]
 
 
 
@@ -324,10 +327,6 @@ done = False
 while not done:
     # Event processing (React to key presses, mouse clicks, etc.)
     ''' for now, we'll just check to see if the X is clicked '''
-    
-    score = 0
-
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
@@ -426,14 +425,14 @@ while not done:
 
 
     ''' here is where you should resolve player collisions with screen edges '''
-    if player[0] < 0:
+    '''if player[0] < 0:
         player[0] = 0
     if player[0] + player[2] > WIDTH:
         player[0] = WIDTH - player[2]
     if player[1] < 0:
         player[1] = 0
     if player[1] + player[3] > HEIGHT:
-        player[1] = HEIGHT - player[3]
+        player[1] = HEIGHT - player[3]'''
 
     if badguy[0] < 0:
         badguy[0] = 0
@@ -443,7 +442,10 @@ while not done:
         badguy[1] = 0
     if badguy[1] + badguy[3] > HEIGHT:
         badguy[1] = HEIGHT - badguy[3]
-
+    
+    if player[0] == 1200 and player[2] == 100:
+        player[0] = 125
+        player[1] = 800
 
     ''' get the coins '''
     hit_list = [c for c in coins if intersects.rect_rect(player, c)]
@@ -483,8 +485,7 @@ while not done:
         screen.blit(text1, [1050, 775])
     if stage == END:
         text1 = MY_FONT.render("Press SPACE to restart.", True, WHITE)
-        screen.blit(text1, [400, 500])
-            
+        screen.blit(text1, [400, 500])     
         if win:
             player_speed = 0
             badguy_speed = 0

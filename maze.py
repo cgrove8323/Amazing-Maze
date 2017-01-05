@@ -10,7 +10,7 @@ pygame.init()
 WIDTH = 1200
 HEIGHT = 800
 SIZE = (WIDTH, HEIGHT)
-TITLE = "Maze"
+TITLE = "Amazing Maze"
 screen = pygame.display.set_mode(SIZE)
 pygame.display.set_caption(TITLE)
 
@@ -144,17 +144,17 @@ wall40 = [500, 250, 25, 75]
 wall41 = [425, 300, 75, 25]
 wall42 = [400, 350, 125, 25]
 wall43 = [400, 0, 25, 75]
-wall44 = [425, -25, 25, 50]
+wall44 = [425, 0, 25, 25]
 wall45 = [425, 50, 25, 25]
 wall46 = [325, 100, 125, 25]
-wall47 = [475, -25, 25, 150]
+wall47 = [475, 0, 25, 150]
 wall48 = [500, 0, 175, 25]
 wall49 = [500, 100, 150, 25]
 wall50 = [650, 50, 25, 75]
 wall51 = [525, 50, 125, 25]
-wall52 = [700, -25, 25, 150]
+wall52 = [700, 0, 25, 125]
 wall53 = [725, 0, 325, 25]
-wall54 = [1025, -25, 25, 100]
+wall54 = [1025, 0, 25, 100]
 wall55 = [725, 50, 125, 25]
 wall56 = [825, 75, 25, 50]
 wall57 = [725, 100, 25, 75]
@@ -187,8 +187,8 @@ wall83 = [350, 50, 25, 50]
 wall84 = [150, 0, 250, 25]
 wall85 = [275, 50, 75, 25]
 wall86 = [275, 75, 25, 50]
-wall87 = [650, -25, 25, 25]
-wall88 = [1075, -25, 25, 25]
+wall87 = [650, 0, 25, 25]
+wall88 = [1075, 0, 25, 25]
 
 wall101 = [125, 0, 25, 75]
 wall102 = [150, 50, 100, 25]
@@ -304,7 +304,7 @@ walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7,
          wall53, wall54, wall55, wall56, wall57, wall58, wall59, wall60, wall61,
          wall62, wall63, wall64, wall65, wall66, wall67, wall68, wall69, wall70,
          wall71, wall72, wall73, wall74, wall75, wall76, wall77, wall78, wall79,
-         wall80, wall81, wall82, wall83, wall84, wall85, wall86, wall87, wall88,
+         wall80, wall81, wall82, wall83, wall84, wall85, wall86, wall87, wall88, 
          wall101, wall102, wall103, wall104, wall105,
          wall106, wall107, wall108, wall109, wall110, wall111,
          wall112, wall113, wall114, wall115, wall116, wall117, wall118, wall119,
@@ -390,7 +390,7 @@ while not done:
         badguy[0] += badguy_vx
         ''' resolve collisions horizontally '''
         for w in walls:
-            if intersects.rect_rect(player, w):        
+            if intersects.rect_rect(player, w):      
                 if player_vx > 0:
                     player[0] = w[0] - player[2]
                 elif player_vx < 0:
@@ -428,7 +428,7 @@ while not done:
 
     ''' here is where you should resolve player collisions with screen edges '''
     
-
+    '''bad guy is not allowed to go through exits'''
     if badguy[0] < 0:
         badguy[0] = 0
     if badguy[0] + badguy[2] > WIDTH:
@@ -485,6 +485,10 @@ while not done:
             player[1] = HEIGHT
 
     '''bottom to top'''
+    if player[1] >= HEIGHT and player[0] == 125:
+        if player_vy > 0:
+            player[0] = 1050
+            player[1] = -player[3]
     if player[1] >= HEIGHT and player[0] == 275:
         if player_vy > 0:
             player[0] = 1050
@@ -549,7 +553,7 @@ while not done:
             screen.blit(text, [500, 200])
         if lose:
             font = pygame.font.Font(None, 48)
-            text = font.render("YOU LOSE", 1, GREEN)
+            text = font.render("YOU LOSE!", 1, GREEN)
             screen.blit(text, [500, 200])
 
     

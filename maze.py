@@ -26,6 +26,7 @@ BLACK = (0, 0, 0)
 YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
 BLUE = (31, 94, 196)
+TURQUOISE = (68, 244, 227)
 
 # Fonts
 MY_FONT = pygame.font.Font(None, 50)
@@ -34,17 +35,18 @@ MY_FONT = pygame.font.Font(None, 50)
 START = 0
 PLAYING = 1
 END = 2
-
+    
 def setup():
     global score, coins, win, lose, stage, player, player_vx, player_vy, player_speed, badguy, badguy_vx, badguy_vy, badguy_speed 
 
     stage = START
     win = False
     lose = False
+    hole = False
     score = 0
 
     # Make a player
-    player =  [525, 425, 25, 25]
+    player =  [800, 725, 25, 25]
     player_vx = 0
     player_vy = 0
     player_speed = 5
@@ -54,6 +56,9 @@ def setup():
     badguy_vx = 0
     badguy_vy = 0
     badguy_speed = 5
+
+    # Black Hole
+    black_hole = [525, 425, 25, 25]
 
     # Make coins
     coin1 = [500, 50, 25, 25]
@@ -154,7 +159,7 @@ wall50 = [650, 50, 25, 75]
 wall51 = [525, 50, 125, 25]
 wall52 = [700, 0, 25, 125]
 wall53 = [725, 0, 325, 25]
-wall54 = [1025, 0, 25, 100]
+wall54 = [1025, 0, 25, 75]
 wall55 = [725, 50, 125, 25]
 wall56 = [825, 75, 25, 50]
 wall57 = [725, 100, 25, 75]
@@ -325,6 +330,7 @@ walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7,
 # Game loop
 setup()
 done = False
+black_hole = [525, 425, 25, 25]
 
 while not done:
     # Event processing (React to key presses, mouse clicks, etc.)
@@ -425,6 +431,11 @@ while not done:
             stage = END
             lose = True
 
+        if intersects.rect_rect(player, black_hole):
+            stage = END
+            lose = True
+            hole = True
+
 
     ''' here is where you should resolve player collisions with screen edges '''
     
@@ -523,9 +534,10 @@ while not done:
 
     pygame.draw.rect(screen, WHITE, player)
     pygame.draw.rect(screen, BLUE, badguy)
+    pygame.draw.rect(screen, GREEN, black_hole)
     
     for w in walls:
-        pygame.draw.rect(screen, RED, w)
+        pygame.draw.rect(screen, TURQUOISE, w)
 
     for c in coins:
         pygame.draw.rect(screen, YELLOW, c)
@@ -534,10 +546,12 @@ while not done:
 
     '''begin/end game text'''
     if stage == START:
-        text1 = MY_FONT.render("THE AMAZING MAZE", True, WHITE)
-        text2 = MY_FONT.render("Press ENTER to play!", True, WHITE)
-        screen.blit(text1, [400, 400])
-        screen.blit(text2, [400, 500])
+        screen.fill(WHITE)
+        font = pygame.font.Font(None, 150)
+        text1 = font.render("THE AMAZING MAZE", True, RED)
+        text2 = font.render("Press ENTER to play!", True, RED)
+        screen.blit(text1, [75, 300])
+        screen.blit(text2, [75, 400])
     if stage == PLAYING:
         font = pygame.font.Font(None, 30)
         text1 = font.render("Score: " + str(score), True, WHITE)
@@ -546,16 +560,21 @@ while not done:
         text1 = MY_FONT.render("Press SPACE to restart.", True, WHITE)
         screen.blit(text1, [400, 500])     
         if win:
+            screen.fill(WHITE)
             player_speed = 0
             badguy_speed = 0
-            font = pygame.font.Font(None, 48)
-            text = font.render("YOU WIN!", 1, GREEN)
+            font = pygame.font.Font(None, 70)
+            text = font.render("YOU WIN!", 1, RED)
             screen.blit(text, [500, 200])
         if lose:
-            font = pygame.font.Font(None, 48)
-            text = font.render("YOU LOSE!", 1, GREEN)
-            screen.blit(text, [500, 200])
-
+            screen.fill(BLACK)
+            font = pygame.font.Font(None, 80)
+            text = font.render("YOU LOSE!", 1, RED)
+            screen.blit(text, [450, 200])
+            if hole:
+                font = pygame.font.Font(None, 80)
+                text = font.render("YOU'VE FALLEN INTO THE BLACK HOLE", 1, RED)
+                screen.blit(text, [75, 300])
     
     # Update screen (Actually draw the picture in the window.)
     pygame.display.flip()

@@ -27,9 +27,15 @@ YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
 BLUE = (31, 94, 196)
 TURQUOISE = (68, 244, 227)
+PURPLE = (72, 27, 107)
+PINK = (255, 35, 240)
 
 # Fonts
 MY_FONT = pygame.font.Font(None, 50)
+font1 = pygame.font.Font(None, 150)
+font2 = pygame.font.Font(None, 50)
+font3 = pygame.font.Font(None, 30)
+font4 = pygame.font.Font(None, 80)
 
 # Stages
 START = 0
@@ -101,7 +107,7 @@ def setup():
 
     coins = [coin1, coin2, coin3, coin4, coin5, coin6, coin7, coin8, coin9,
              coin10, coin11, coin12, coin13, coin14, coin15, coin16, coin17,
-             coin18, coin19, coin20, coin21, coin22, coin23, coin24, coin25,
+            coin18, coin19, coin20, coin21, coin22, coin23, coin24, coin25,
              coin26, coin27, coin28, coin29, coin30, coin31, coin32, coin33,
              coin34, coin35, coin36, coin37]
 
@@ -430,6 +436,7 @@ while not done:
         if intersects.rect_rect(player, badguy):
             stage = END
             lose = True
+            hole = False
 
         if intersects.rect_rect(player, black_hole):
             stage = END
@@ -530,52 +537,57 @@ while not done:
 
         
     # Drawing code (Describe the picture. It isn't actually drawn yet.)
-    screen.fill(BLACK)
+    screen.fill(PURPLE)
 
     pygame.draw.rect(screen, WHITE, player)
-    pygame.draw.rect(screen, BLUE, badguy)
-    pygame.draw.rect(screen, GREEN, black_hole)
+    pygame.draw.rect(screen, RED, badguy)
+    pygame.draw.ellipse(screen, BLACK, black_hole)
     
     for w in walls:
         pygame.draw.rect(screen, TURQUOISE, w)
 
     for c in coins:
-        pygame.draw.rect(screen, YELLOW, c)
+        pygame.draw.ellipse(screen, YELLOW, c)
         
    
 
     '''begin/end game text'''
     if stage == START:
         screen.fill(WHITE)
-        font = pygame.font.Font(None, 150)
-        text1 = font.render("THE AMAZING MAZE", True, RED)
-        text2 = font.render("Press ENTER to play!", True, RED)
+        text1 = font1.render("THE AMAZING MAZE", True, RED)
+        text2 = font1.render("Press ENTER to play!", True, RED)
+        text3 = font2.render("Player Controls (White): Arrow Keys", True, RED)
+        text4 = font2.render("Enemy Controls (Red): W A S D", True, RED)
         screen.blit(text1, [75, 300])
         screen.blit(text2, [75, 400])
+        screen.blit(text3, [300, 525])
+        screen.blit(text4, [325, 575])
     if stage == PLAYING:
-        font = pygame.font.Font(None, 30)
-        text1 = font.render("Score: " + str(score), True, WHITE)
+        text1 = font3.render("Score: " + str(score), True, WHITE)
         screen.blit(text1, [1050, 775])
-    if stage == END:
-        text1 = MY_FONT.render("Press SPACE to restart.", True, WHITE)
-        screen.blit(text1, [400, 500])     
+    if stage == END:     
         if win:
             screen.fill(WHITE)
             player_speed = 0
             badguy_speed = 0
-            font = pygame.font.Font(None, 70)
-            text = font.render("YOU WIN!", 1, RED)
-            screen.blit(text, [500, 200])
+            text = font1.render("YOU WIN!", 1, RED)
+            screen.blit(text, [350, 200])
         if lose:
             screen.fill(BLACK)
-            font = pygame.font.Font(None, 80)
-            text = font.render("YOU LOSE!", 1, RED)
-            screen.blit(text, [450, 200])
+            text = font1.render("YOU LOSE!", 1, RED)
+            screen.blit(text, [325, 200])
             if hole:
-                font = pygame.font.Font(None, 80)
-                text = font.render("YOU'VE FALLEN INTO THE BLACK HOLE", 1, RED)
-                screen.blit(text, [75, 300])
-    
+                text = font4.render("YOU'VE FALLEN INTO THE BLACK HOLE", 1, RED)
+                screen.blit(text, [50, 350])
+            else:
+                screen.fill(BLACK)
+                text = font1.render("YOU LOSE!", 1, RED)
+                screen.blit(text, [325, 200])
+        text1 = font4.render("Press SPACE to restart.", True, RED)
+        text2 = font4.render("Score: " + str(score), True, RED)
+        screen.blit(text1, [300, 450])
+        screen.blit(text2, [500, 600])
+                
     # Update screen (Actually draw the picture in the window.)
     pygame.display.flip()
 

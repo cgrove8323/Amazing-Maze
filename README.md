@@ -1,4 +1,4 @@
-# Amazing-Maze
+# Amazing Maze
 
 #How to Play
 # On the screen, there is a red player, a white player, multiple yellow coins, and a black hole.
